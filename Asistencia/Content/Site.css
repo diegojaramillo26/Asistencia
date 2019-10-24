@@ -1,0 +1,6 @@
+﻿.signature-pad > canvas {
+    display: block;
+    width: 300px;
+    height: 150px;
+    margin-bottom: 5px;
+}

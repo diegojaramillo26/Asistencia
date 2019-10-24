@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Asistencia.Models.Evento>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.strTema)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strFacilitador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strLugar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtmFecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dtmDuracion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.strTema)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strFacilitador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strLugar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtmFecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dtmDuracion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.intIdEvento }) |
+            @Html.ActionLink("Details", "Details", new { id=item.intIdEvento }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.intIdEvento })
+        </td>
+    </tr>
+}
+
+</table>

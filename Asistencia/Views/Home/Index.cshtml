@@ -1,0 +1,67 @@
+﻿@model Asistencia.Models.Asistencia
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div class="container">
+
+    <form>
+        <div class="form-group">
+            <label for="Nombre">Nombre completo</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <label >Firma</label>
+
+            <div id="signature-pad" class="signature-pad" >
+                <div class="signature-pad--body"  >
+                    <canvas class=" form-control form-control-lg" style="height:150px;" ></canvas>
+                </div>
+                <div class="signature-pad--footer">
+                    <div class="signature-pad--actions">
+                        <div>
+                            <br/>
+                            <button type="button" class="btn btn-secondary btn-sm pull-right" data-action="clear">Clear</button>
+                            @*<button type="button" class="button" data-action="change-color">Change color</button>
+                            <button type="button" class="button" data-action="undo">Undo</button>*@
+
+                        </div>
+                        @*<div>
+                            <button type="button" class="button save" data-action="save-png">Save as PNG</button>
+                            <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
+                            <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+            @*@Html.EditorFor(model => model.MySignature)*@
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        @*<button type="button" class="btn btn-default btn-clear-canvas">Clear</button>*@
+    </form>
+
+    @*<hr />
+        <dl class="dl-horizontal">
+            @Html.DisplayFor(model => model.MySignature)
+
+            @Html.EditorFor(model => model.MySignature)
+        </dl>*@
+</div>
+@*<p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
+@section Scripts {
+    <script src="~/Scripts/signature_pad.min.js"></script>
+    <script src="~/Scripts/SignaturePadInit.js"></script>
+    <script src="~/Scripts/app.js"></script>
+}

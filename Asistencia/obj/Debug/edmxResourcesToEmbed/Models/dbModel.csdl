@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbAppsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asistente">
+    <Key>
+      <PropertyRef Name="IntIdAsistente" />
+    </Key>
+    <Property Name="IntIdAsistente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="strNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="strCargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="btyFirma" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="intIdEvento" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Evento" Relationship="Self.FK_Asistentes_Eventos" FromRole="Asistentes" ToRole="Eventos" />
+  </EntityType>
+  <EntityType Name="Evento">
+    <Key>
+      <PropertyRef Name="intIdEvento" />
+    </Key>
+    <Property Name="intIdEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="strTema" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="strFacilitador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="strLugar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="dtmFecha" Type="DateTime" Precision="0" />
+    <Property Name="dtmDuracion" Type="Time" Precision="7" />
+    <NavigationProperty Name="Asistentes" Relationship="Self.FK_Asistentes_Eventos" FromRole="Eventos" ToRole="Asistentes" />
+  </EntityType>
+  <Association Name="FK_Asistentes_Eventos">
+    <End Role="Eventos" Type="Self.Evento" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Asistentes" Type="Self.Asistente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Eventos">
+        <PropertyRef Name="intIdEvento" />
+      </Principal>
+      <Dependent Role="Asistentes">
+        <PropertyRef Name="intIdEvento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="dbAppsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Asistentes" EntityType="Self.Asistente" />
+    <EntitySet Name="Eventos" EntityType="Self.Evento" />
+    <AssociationSet Name="FK_Asistentes_Eventos" Association="Self.FK_Asistentes_Eventos">
+      <End Role="Eventos" EntitySet="Eventos" />
+      <End Role="Asistentes" EntitySet="Asistentes" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
