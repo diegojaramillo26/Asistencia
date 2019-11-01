@@ -17,8 +17,9 @@ namespace Asistencia.Models
         public int IntIdAsistente { get; set; }
         public string strNombre { get; set; }
         public string strCargo { get; set; }
-        public byte[] btyFirma { get; set; }
         public int intIdEvento { get; set; }
+        public string strSeccion { get; set; }
+        public byte[] binFirma { get; set; }
     
         public virtual Evento Evento { get; set; }
     }

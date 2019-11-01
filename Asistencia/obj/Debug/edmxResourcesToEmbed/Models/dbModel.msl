@@ -4,10 +4,11 @@
     <EntitySetMapping Name="Asistentes">
       <EntityTypeMapping TypeName="dbAppsModel.Asistente">
         <MappingFragment StoreEntitySet="Asistentes">
+          <ScalarProperty Name="binFirma" ColumnName="binFirma" />
+          <ScalarProperty Name="strSeccion" ColumnName="strSeccion" />
           <ScalarProperty Name="IntIdAsistente" ColumnName="IntIdAsistente" />
           <ScalarProperty Name="strNombre" ColumnName="strNombre" />
           <ScalarProperty Name="strCargo" ColumnName="strCargo" />
-          <ScalarProperty Name="btyFirma" ColumnName="btyFirma" />
           <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -7,9 +7,10 @@
     <Property Name="IntIdAsistente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="strNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="strCargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="btyFirma" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
     <Property Name="intIdEvento" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Evento" Relationship="Self.FK_Asistentes_Eventos" FromRole="Asistentes" ToRole="Eventos" />
+    <Property Name="strSeccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="binFirma" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Evento">
     <Key>

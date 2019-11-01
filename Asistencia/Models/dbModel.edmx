@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dbAppsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dbAppsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asistentes">
           <Key>
             <PropertyRef Name="IntIdAsistente" />
@@ -12,7 +12,8 @@
           <Property Name="IntIdAsistente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="strNombre" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="strCargo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="btyFirma" Type="varbinary(max)" Nullable="false" />
+          <Property Name="strSeccion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="binFirma" Type="varbinary(max)" Nullable="false" />
           <Property Name="intIdEvento" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Eventos">
@@ -48,8 +49,7 @@
             <End Role="Asistentes" EntitySet="Asistentes" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbAppsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -60,9 +60,10 @@
           <Property Name="IntIdAsistente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="strNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="strCargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="btyFirma" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="intIdEvento" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Evento" Relationship="Self.FK_Asistentes_Eventos" FromRole="Asistentes" ToRole="Eventos" />
+          <Property Name="strSeccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="binFirma" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Evento">
           <Key>
@@ -107,10 +108,11 @@
           <EntitySetMapping Name="Asistentes">
             <EntityTypeMapping TypeName="dbAppsModel.Asistente">
               <MappingFragment StoreEntitySet="Asistentes">
+                <ScalarProperty Name="binFirma" ColumnName="binFirma" />
+                <ScalarProperty Name="strSeccion" ColumnName="strSeccion" />
                 <ScalarProperty Name="IntIdAsistente" ColumnName="IntIdAsistente" />
                 <ScalarProperty Name="strNombre" ColumnName="strNombre" />
                 <ScalarProperty Name="strCargo" ColumnName="strCargo" />
-                <ScalarProperty Name="btyFirma" ColumnName="btyFirma" />
                 <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
               </MappingFragment>
             </EntityTypeMapping>
