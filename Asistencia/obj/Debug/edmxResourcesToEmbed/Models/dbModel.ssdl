@@ -8,7 +8,7 @@
     <Property Name="strNombre" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="strCargo" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="strSeccion" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="binFirma" Type="varbinary(max)" Nullable="false" />
+    <Property Name="binFirma" Type="varbinary(max)" />
     <Property Name="intIdEvento" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Eventos">

@@ -47,24 +47,16 @@
                       new SelectListItem { Value = "Middle school" , Text = "Middle school" },
                       new SelectListItem { Value = "Preschool" , Text = "Preschool" },
                    }, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model.strCargo, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.strSeccion, "", new { @class = "text-danger" })
 
         </div>
 
-        @*<div class="form-group">
-            <label for="Nombre">Nombre completo</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nombre Completo">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Cargo</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Cargo">
-        </div>*@
         <div class="form-group">
             <label>Firma</label>
 
             <div id="signature-pad" class="signature-pad">
                 <div class="signature-pad--body">
-                    <canvas class=" form-control form-control-lg" style="height:150px;"></canvas>
+                    <canvas class="form-control form-control-lg" style="height:150px;"></canvas>
                 </div>
                 <div class="signature-pad--footer">
                     <div class="signature-pad--actions">
@@ -72,8 +64,6 @@
                             <button type="button" class="btn btn-secondary btn-sm pull-right" data-action="clear">
                                 <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
                             </button>
-                            @*<button type="button" class="button" data-action="change-color">Change color</button>
-                            <button type="button" class="button" data-action="undo">Undo</button>*@
 
                         </div>
                         @*<div>
@@ -86,22 +76,11 @@
             </div>
             @*@Html.EditorFor(model => model.MySignature)*@
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        @*<button type="button" class="btn btn-default btn-clear-canvas">Clear</button>*@
-        @*</form>*@
+        <button type="submit" value="Create" class="btn btn-primary">Submit</button>
 
-        @*<hr />
-        <dl class="dl-horizontal">
-            @Html.DisplayFor(model => model.MySignature)
-
-            @Html.EditorFor(model => model.MySignature)
-        </dl>*@
     </div>
 }
-    @*<p>
-            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-            @Html.ActionLink("Back to List", "Index")
-        </p>*@
+
     @section Scripts {
         <script src="~/Scripts/signature_pad.min.js"></script>
         <script src="~/Scripts/SignaturePadInit.js"></script>

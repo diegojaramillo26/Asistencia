@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Asistencia.Models.Asistente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.strNombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strCargo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.strSeccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.binFirma)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Evento.strTema)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.strNombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strCargo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.strSeccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.binFirma)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Evento.strTema)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IntIdAsistente }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IntIdAsistente }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IntIdAsistente })
+        </td>
+    </tr>
+}
+
+</table>

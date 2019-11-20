@@ -11,7 +11,8 @@ namespace Asistencia.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Asistente
     {
         public int IntIdAsistente { get; set; }
@@ -19,6 +20,8 @@ namespace Asistencia.Models
         public string strCargo { get; set; }
         public int intIdEvento { get; set; }
         public string strSeccion { get; set; }
+
+        [UIHint("SignaturePad")] 
         public byte[] binFirma { get; set; }
     
         public virtual Evento Evento { get; set; }

@@ -1,10 +1,27 @@
 ﻿@model byte[]
 
-    <div class="signature-pad">
+    @*<div class="signature-pad" width="100%">
 
         <canvas class="panel panel-default"></canvas>
         <br>
         <button type="button" class="btn btn-default btn-clear-canvas">Clear</button>
         @Html.HiddenFor(model => model, ViewData["htmlAttributes"])
 
+    </div>*@
+
+    <div id="signature-pad" class="signature-pad">
+        <div class="signature-pad--body">
+            <canvas class="form-control form-control-lg" style="height:150px;"></canvas>
+        </div>
+        <div class="signature-pad--footer">
+            <div class="signature-pad--actions">
+                <div>
+                    <button type="button" class="btn btn-secondary btn-sm pull-right" data-action="clear">
+                        <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(model => model, ViewData["htmlAttributes"])
     </div>

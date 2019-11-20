@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Asistencia.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace Asistencia.Controllers
 {
     public class HomeController : Controller
     {
+        private dbAppsEntities db = new dbAppsEntities();
+
         // GET: Home
         public ActionResult Index()
         {
@@ -28,18 +31,33 @@ namespace Asistencia.Controllers
 
         // POST: Home/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "strNombre,strCargo,strSeccion,binFirma")] Asistencia.Models.Asistente asistente)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                asistente.intIdEvento = int.Parse((string)this.RouteData.Values["id"]);
+                db.Asistentes.Add(asistente);
+                db.SaveChanges();
+                return RedirectToAction("Create");
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(asistente);
+            //try
+            //{
+            //    // TODO: Add insert logic here
+            //    if (ModelState.IsValid)
+            //    {
+            //        db.Asistentes.Add(asistente);
+            //        db.SaveChanges();
+            //        return RedirectToAction("Index");
+            //    }
+
+            //}
+            //catch
+            //{
+            //    return View(asistente);
+            //}
         }
 
         // GET: Home/Edit/5

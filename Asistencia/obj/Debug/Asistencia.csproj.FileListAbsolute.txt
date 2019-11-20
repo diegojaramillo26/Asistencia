@@ -154,7 +154,7 @@ D:\Projects\Asistencia\Asistencia\bin\System.Web.Webpages.Razor.xml
 D:\Projects\Asistencia\Asistencia\bin\System.Web.Helpers.xml
 D:\Projects\Asistencia\Asistencia\bin\System.Web.Mvc.xml
 D:\Projects\Asistencia\Asistencia\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.csprojAssemblyReference.cache
 D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.csproj.CopyComplete
 D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.dll
 D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.pdb
+D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.csprojAssemblyReference.cache

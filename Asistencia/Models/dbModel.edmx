@@ -13,7 +13,7 @@
           <Property Name="strNombre" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="strCargo" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="strSeccion" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="binFirma" Type="varbinary(max)" Nullable="false" />
+          <Property Name="binFirma" Type="varbinary(max)" />
           <Property Name="intIdEvento" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Eventos">
@@ -63,7 +63,7 @@
           <Property Name="intIdEvento" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Evento" Relationship="Self.FK_Asistentes_Eventos" FromRole="Asistentes" ToRole="Eventos" />
           <Property Name="strSeccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="binFirma" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="binFirma" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Evento">
           <Key>
