@@ -50,6 +50,7 @@ namespace Asistencia.Controllers
         {
             if (ModelState.IsValid)
             {
+                evento.bitEstado = true;
                 db.Eventos.Add(evento);
                 db.SaveChanges();
                 return RedirectToAction("Index");

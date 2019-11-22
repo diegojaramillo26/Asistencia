@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Asistentes">
       <EntityTypeMapping TypeName="dbAppsModel.Asistente">
         <MappingFragment StoreEntitySet="Asistentes">
+          <ScalarProperty Name="strDocumento" ColumnName="strDocumento" />
           <ScalarProperty Name="binFirma" ColumnName="binFirma" />
           <ScalarProperty Name="strSeccion" ColumnName="strSeccion" />
           <ScalarProperty Name="IntIdAsistente" ColumnName="IntIdAsistente" />

@@ -15,70 +15,77 @@
         <h4>Asistente</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.Label("Nombre")
-        @Html.EditorFor(model => model.strNombre, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.strNombre, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Cargo")
-        @Html.EditorFor(model => model.strCargo, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.strCargo, "", new { @class = "text-danger" })
-    </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.intIdEvento, "intIdEvento", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownList("intIdEvento", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.intIdEvento, "", new { @class = "text-danger" })
-                </div>
-            </div>*@
-
-    <div class="form-group">
-        @Html.Label("Sección")
-        @*@Html.EditorFor(model => model.strSeccion, new { htmlAttributes = new { @class = "form-control" } })*@
-        @Html.DropDownListFor(model => model.strSeccion,
-        new List<SelectListItem> {
-             new SelectListItem { Value = "" , Text = "Seleccione...", Disabled =true, Selected  = true},
-              new SelectListItem { Value = "Administrativos" , Text = "Administrativos" },
-              new SelectListItem { Value = "Asesoras de formación" , Text = "Asesoras de formación" },
-              new SelectListItem { Value = "Directivos" , Text = "Directivos" },
-              new SelectListItem { Value = "Elementary school" , Text = "Elementary school" },
-              new SelectListItem { Value = "High school" , Text = "High school" },
-              new SelectListItem { Value = "Mantenimiento" , Text = "Mantenimiento" },
-              new SelectListItem { Value = "Middle school" , Text = "Middle school" },
-              new SelectListItem { Value = "Preschool" , Text = "Preschool" },
-           }, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.strSeccion, "", new { @class = "text-danger" })
-
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Firma")
-        @Html.EditorFor(model => model.binFirma)
-        @Html.ValidationMessageFor(model => model.binFirma, "", new { @class = "text-danger" })
-        @*<label>Firma</label>
-
-        <div id="signature-pad" class="signature-pad">
-            <div class="signature-pad--body">
-                <canvas class="form-control form-control-lg" style="height:150px;"></canvas>
-            </div>
-            <div class="signature-pad--footer">
-                <div class="signature-pad--actions">
-                    <div>
-                        <button type="button" class="btn btn-secondary btn-sm pull-right" data-action="clear">
-                            <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-        </div>*@
-    </div>
 
         <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            @Html.Label("Documento")
+            @Html.EditorFor(model => model.strDocumento, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strDocumento, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Nombre")
+            @Html.EditorFor(model => model.strNombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strNombre, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Cargo")
+            @Html.EditorFor(model => model.strCargo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strCargo, "", new { @class = "text-danger" })
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.intIdEvento, "intIdEvento", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("intIdEvento", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.intIdEvento, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.Label("Sección")
+            @*@Html.EditorFor(model => model.strSeccion, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.DropDownListFor(model => model.strSeccion,
+            new List<SelectListItem> {
+                 new SelectListItem { Value = "" , Text = "Seleccione...", Disabled =true, Selected  = true},
+                  new SelectListItem { Value = "Administrativos" , Text = "Administrativos" },
+                  new SelectListItem { Value = "Asesoras de formación" , Text = "Asesoras de formación" },
+                  new SelectListItem { Value = "Directivos" , Text = "Directivos" },
+                  new SelectListItem { Value = "Elementary school" , Text = "Elementary school" },
+                  new SelectListItem { Value = "High school" , Text = "High school" },
+                  new SelectListItem { Value = "Mantenimiento" , Text = "Mantenimiento" },
+                  new SelectListItem { Value = "Middle school" , Text = "Middle school" },
+                  new SelectListItem { Value = "Preschool" , Text = "Preschool" },
+               }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.strSeccion, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Firma")
+            @Html.EditorFor(model => model.binFirma)
+            @Html.ValidationMessageFor(model => model.binFirma, "", new { @class = "text-danger" })
+            @*<label>Firma</label>
+
+            <div id="signature-pad" class="signature-pad">
+                <div class="signature-pad--body">
+                    <canvas class="form-control form-control-lg" style="height:150px;"></canvas>
+                </div>
+                <div class="signature-pad--footer">
+                    <div class="signature-pad--actions">
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm pull-right" data-action="clear">
+                                <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
         </div>
     </div>
 }

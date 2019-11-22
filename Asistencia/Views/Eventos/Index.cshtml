@@ -30,7 +30,7 @@
             </tr>
             </thead>
         <tbody>
-            <
+            
             @foreach (var item in Model)
             {
                 <tr>
@@ -53,7 +53,7 @@
                         @Html.ActionLink("Editar", "Edit", new { id = item.intIdEvento }) |
                         @*@Html.ActionLink("Detalle", "Details", new { id = item.intIdEvento }) |*@
                         @Html.ActionLink("Eliminar", "Delete", new { id = item.intIdEvento })|
-                        @Html.ActionLink("Asistencia", "Create", "Home", new { id = item.intIdEvento }, null)
+                        @Html.ActionLink("Asistencia", "Create", "Asistentes", new { id = item.intIdEvento }, null)
                     </td>
                 </tr>
             }

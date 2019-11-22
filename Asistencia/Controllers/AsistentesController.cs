@@ -37,10 +37,26 @@ namespace Asistencia.Controllers
         }
 
         // GET: Asistentes/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.intIdEvento = new SelectList(db.Eventos, "intIdEvento", "strTema");
-            return View();
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                Evento evento = db.Eventos.Find(int.Parse((string)this.RouteData.Values["id"]));
+                if (evento.bitEstado != false)
+                {
+                    return View();
+                }
+                else
+                {
+                    return Content("<script language='javascript' type='text/javascript'>alert('El evento no se encuentra activo');</script>");
+                }
+            }
+
+
         }
 
         // POST: Asistentes/Create

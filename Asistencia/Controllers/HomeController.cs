@@ -22,11 +22,20 @@ namespace Asistencia.Controllers
         {
             return View();
         }
-
+        
         // GET: Home/Create
         public ActionResult Create()
         {
-            return View();
+            Evento evento = db.Eventos.Find(int.Parse((string)this.RouteData.Values["id"]));
+            if(evento.bitEstado != false)
+            {
+                return View();
+            }
+            else
+            {
+                return Content("<script language='javascript' type='text/javascript'>alert('El evento no se encuentra activo');</script>");
+            }
+            
         }
 
         // POST: Home/Create
