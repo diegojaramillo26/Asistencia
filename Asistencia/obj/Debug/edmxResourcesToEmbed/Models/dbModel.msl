@@ -16,6 +16,7 @@
     <EntitySetMapping Name="Eventos">
       <EntityTypeMapping TypeName="dbAppsModel.Evento">
         <MappingFragment StoreEntitySet="Eventos">
+          <ScalarProperty Name="bitEstado" ColumnName="bitEstado" />
           <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
           <ScalarProperty Name="strTema" ColumnName="strTema" />
           <ScalarProperty Name="strFacilitador" ColumnName="strFacilitador" />

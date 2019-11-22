@@ -21,6 +21,7 @@
     <Property Name="strLugar" Type="varchar" MaxLength="100" />
     <Property Name="dtmFecha" Type="date" />
     <Property Name="dtmDuracion" Type="time" Precision="7" />
+    <Property Name="bitEstado" Type="bit" />
   </EntityType>
   <Association Name="FK_Asistentes_Eventos">
     <End Role="Eventos" Type="Self.Eventos" Multiplicity="1">

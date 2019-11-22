@@ -26,6 +26,7 @@
           <Property Name="strLugar" Type="varchar" MaxLength="100" />
           <Property Name="dtmFecha" Type="date" />
           <Property Name="dtmDuracion" Type="time" Precision="7" />
+          <Property Name="bitEstado" Type="bit" />
         </EntityType>
         <Association Name="FK_Asistentes_Eventos">
           <End Role="Eventos" Type="Self.Eventos" Multiplicity="1">
@@ -76,6 +77,7 @@
           <Property Name="dtmFecha" Type="DateTime" Precision="0" />
           <Property Name="dtmDuracion" Type="Time" Precision="7" />
           <NavigationProperty Name="Asistentes" Relationship="Self.FK_Asistentes_Eventos" FromRole="Eventos" ToRole="Asistentes" />
+          <Property Name="bitEstado" Type="Boolean" />
         </EntityType>
         <Association Name="FK_Asistentes_Eventos">
           <End Role="Eventos" Type="Self.Evento" Multiplicity="1">
@@ -120,6 +122,7 @@
           <EntitySetMapping Name="Eventos">
             <EntityTypeMapping TypeName="dbAppsModel.Evento">
               <MappingFragment StoreEntitySet="Eventos">
+                <ScalarProperty Name="bitEstado" ColumnName="bitEstado" />
                 <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
                 <ScalarProperty Name="strTema" ColumnName="strTema" />
                 <ScalarProperty Name="strFacilitador" ColumnName="strFacilitador" />

@@ -23,6 +23,7 @@
     <Property Name="dtmFecha" Type="DateTime" Precision="0" />
     <Property Name="dtmDuracion" Type="Time" Precision="7" />
     <NavigationProperty Name="Asistentes" Relationship="Self.FK_Asistentes_Eventos" FromRole="Eventos" ToRole="Asistentes" />
+    <Property Name="bitEstado" Type="Boolean" />
   </EntityType>
   <Association Name="FK_Asistentes_Eventos">
     <End Role="Eventos" Type="Self.Evento" Multiplicity="1">
