@@ -239,3 +239,5 @@ E:\Proyectos\Asistencia\Asistencia\obj\Debug\Asistencia.csproj.CoreCompileInputs
 E:\Proyectos\Asistencia\Asistencia\obj\Debug\Asistencia.csproj.CopyComplete
 E:\Proyectos\Asistencia\Asistencia\obj\Debug\Asistencia.dll
 E:\Proyectos\Asistencia\Asistencia\obj\Debug\Asistencia.pdb
+E:\Proyectos\Asistencia\Asistencia\bin\QRCoder.dll
+E:\Proyectos\Asistencia\Asistencia\bin\System.Drawing.Common.dll

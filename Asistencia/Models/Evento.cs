@@ -32,6 +32,7 @@ namespace Asistencia.Models
         [StringLength(100, ErrorMessage = "Máximo 100 caracteres")]
         public string strLugar { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Required(ErrorMessage = "La fecha es requerida")]
         public System.DateTime dtmFecha { get; set; }
         [DataType(DataType.Time)]

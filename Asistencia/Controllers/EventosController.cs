@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Asistencia.Models;
+using QRCoder;
 
 namespace Asistencia.Controllers
 {
@@ -33,6 +36,28 @@ namespace Asistencia.Controllers
                 return HttpNotFound();
             }
             return View(evento);
+        }
+
+        // GET: Link
+        public ActionResult Link(string txtQRCode)
+        {
+            ViewBag.txtQRCode = txtQRCode;
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(txtQRCode, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new QRCode(qrCodeData);
+            //System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();
+            //imgBarCode.Height = 150;
+            //imgBarCode.Width = 150;
+            using (Bitmap bitMap = qrCode.GetGraphic(20))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    ViewBag.imageBytes = ms.ToArray();
+                    //imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+                }
+            }
+            return View();
         }
 
         // GET: Eventos/Create
@@ -79,7 +104,7 @@ namespace Asistencia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "intIdEvento,strTema,strFacilitador,strLugar,dtmFecha,dtmDuracion")] Evento evento)
+        public ActionResult Edit([Bind(Include = "intIdEvento,strTema,strFacilitador,strLugar,dtmFecha,dtmDuracion,bitEstado")] Evento evento)
         {
             if (ModelState.IsValid)
             {

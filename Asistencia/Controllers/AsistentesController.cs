@@ -64,16 +64,16 @@ namespace Asistencia.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IntIdAsistente,strNombre,strCargo,intIdEvento,strSeccion,binFirma")] Asistente asistente)
+        public ActionResult Create([Bind(Include = "IntIdAsistente,strNombre,strCargo,intIdEvento,strSeccion,binFirma,strDocumento")] Asistente asistente)
         {
             if (ModelState.IsValid)
             {
+                asistente.intIdEvento = int.Parse((string)this.RouteData.Values["id"]);
                 db.Asistentes.Add(asistente);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
-            ViewBag.intIdEvento = new SelectList(db.Eventos, "intIdEvento", "strTema", asistente.intIdEvento);
             return View(asistente);
         }
 

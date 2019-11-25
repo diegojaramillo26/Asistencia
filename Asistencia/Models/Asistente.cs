@@ -29,7 +29,7 @@ namespace Asistencia.Models
         [Required(ErrorMessage = "La firma es requerida")]
         [UIHint("SignaturePad")]
         public byte[] binFirma { get; set; }
-        [Required(ErrorMessage = "La sección es requerida")]
+        [Required(ErrorMessage = "El documento es requerido")]
         [StringLength(100, ErrorMessage = "Máximo 100 caracteres")]
         public string strDocumento { get; set; }
     

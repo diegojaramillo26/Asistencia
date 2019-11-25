@@ -26,6 +26,9 @@
                 <th>
                     @Html.Label("Duración")
                 </th>
+                <th>
+                    @Html.Label("Activa")
+                </th>
                 <th></th>
             </tr>
             </thead>
@@ -33,33 +36,39 @@
             
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.strTema)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.strFacilitador)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.strLugar)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.dtmFecha)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.dtmDuracion)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Editar", "Edit", new { id = item.intIdEvento }) |
-                        @*@Html.ActionLink("Detalle", "Details", new { id = item.intIdEvento }) |*@
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.intIdEvento })|
-                        @Html.ActionLink("Asistencia", "Create", "Asistentes", new { id = item.intIdEvento }, null)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.strTema)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.strFacilitador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.strLugar)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dtmFecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dtmDuracion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bitEstado)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.intIdEvento }) |
+                    @Html.ActionLink("Detalle", "Details", new { id = item.intIdEvento }) |
+                    @Html.ActionLink("Asistencia", "Create", "Asistentes", new { id = item.intIdEvento }, null)|
+                    @*@Html.ActionLink("QR", "Link", new { txtQRCode = @Url.Action("Create","Asistentes",new { id = item.intIdEvento })}) |*@
+                    @Html.ActionLink("QR", "Link", new { txtQRCode = @Url.Action("Create", "Asistentes", new {id = item.intIdEvento}, this.Request.Url.Scheme)}) |
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.intIdEvento })|
+
+                </td>
+            </tr>
             }
             </tbody>
 </table>
 
-<p>
-    @Html.ActionLink("Crear evento", "Create")
-</p>
+    <p>
+        <input type="button" value="Crear evento" onclick="location.href='@Url.Action("Create","Eventos")'" class="btn btn-primary" />
+    </p>
