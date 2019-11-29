@@ -15,10 +15,13 @@ namespace Asistencia.Controllers
         private dbAppsEntities db = new dbAppsEntities();
 
         // GET: Asistentes
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
-            var asistentes = db.Asistentes.Include(a => a.Evento);
-            return View(asistentes.ToList());
+           //var asistentes = db.Asistentes.Include(b => b.Evento);
+            var asistentes = (from c in db.Asistentes.Include("Evento")
+                         where c.intIdEvento == id
+                         select c).ToList();
+            return View(asistentes);
         }
 
         // GET: Asistentes/Details/5
@@ -29,6 +32,7 @@ namespace Asistencia.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Asistente asistente = db.Asistentes.Find(id);
+           
             if (asistente == null)
             {
                 return HttpNotFound();
@@ -133,7 +137,7 @@ namespace Asistencia.Controllers
             Asistente asistente = db.Asistentes.Find(id);
             db.Asistentes.Remove(asistente);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Eventos");
         }
 
         protected override void Dispose(bool disposing)

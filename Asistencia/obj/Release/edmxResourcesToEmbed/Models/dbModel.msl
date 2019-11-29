@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbAppsModelStoreContainer" CdmEntityContainer="dbAppsEntities">
+    <EntitySetMapping Name="Asistentes">
+      <EntityTypeMapping TypeName="dbAppsModel.Asistente">
+        <MappingFragment StoreEntitySet="Asistentes">
+          <ScalarProperty Name="strDocumento" ColumnName="strDocumento" />
+          <ScalarProperty Name="binFirma" ColumnName="binFirma" />
+          <ScalarProperty Name="strSeccion" ColumnName="strSeccion" />
+          <ScalarProperty Name="IntIdAsistente" ColumnName="IntIdAsistente" />
+          <ScalarProperty Name="strNombre" ColumnName="strNombre" />
+          <ScalarProperty Name="strCargo" ColumnName="strCargo" />
+          <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Eventos">
+      <EntityTypeMapping TypeName="dbAppsModel.Evento">
+        <MappingFragment StoreEntitySet="Eventos">
+          <ScalarProperty Name="bitEstado" ColumnName="bitEstado" />
+          <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
+          <ScalarProperty Name="strTema" ColumnName="strTema" />
+          <ScalarProperty Name="strFacilitador" ColumnName="strFacilitador" />
+          <ScalarProperty Name="strLugar" ColumnName="strLugar" />
+          <ScalarProperty Name="dtmFecha" ColumnName="dtmFecha" />
+          <ScalarProperty Name="dtmDuracion" ColumnName="dtmDuracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

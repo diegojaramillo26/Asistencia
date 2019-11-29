@@ -1,0 +1,88 @@
+﻿@model Asistencia.Models.Asistente
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <h2>Index</h2>
+        @*<form>*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.Label("Nombre")
+
+            @Html.EditorFor(model => model.strNombre, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strNombre, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Cargo")
+            @Html.EditorFor(model => model.strCargo, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strCargo, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Sección")
+
+            @*@Html.EditorFor(model => model.strSeccion, new { htmlAttributes = new { @class = "form-control" } })*@
+
+            @Html.DropDownListFor(model => model.strSeccion,
+                 new List<SelectListItem> {
+                     new SelectListItem { Value = "" , Text = "Seleccione...", Disabled =true, Selected  = true},
+                      new SelectListItem { Value = "Administrativos" , Text = "Administrativos" },
+                      new SelectListItem { Value = "Asesoras de formación" , Text = "Asesoras de formación" },
+                      new SelectListItem { Value = "Directivos" , Text = "Directivos" },
+                      new SelectListItem { Value = "Elementary school" , Text = "Elementary school" },
+                      new SelectListItem { Value = "High school" , Text = "High school" },
+                      new SelectListItem { Value = "Mantenimiento" , Text = "Mantenimiento" },
+                      new SelectListItem { Value = "Middle school" , Text = "Middle school" },
+                      new SelectListItem { Value = "Preschool" , Text = "Preschool" },
+                   }, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.strSeccion, "", new { @class = "text-danger" })
+
+        </div>
+
+        <div class="form-group">
+            <label>Firma</label>
+
+            <div id="signature-pad" class="signature-pad">
+                <div class="signature-pad--body">
+                    <canvas class="form-control form-control-lg" style="height:150px;"></canvas>
+                </div>
+                <div class="signature-pad--footer">
+                    <div class="signature-pad--actions">
+                        <div>
+                            <button type="button" class="btn btn-secondary btn-sm pull-right" data-action="clear">
+                                <span class="glyphicon glyphicon-erase" aria-hidden="true"></span>
+                            </button>
+
+                        </div>
+                        @*<div>
+                            <button type="button" class="button save" data-action="save-png">Save as PNG</button>
+                            <button type="button" class="button save" data-action="save-jpg">Save as JPG</button>
+                            <button type="button" class="button save" data-action="save-svg">Save as SVG</button>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+            @*@Html.EditorFor(model => model.MySignature)*@
+        </div>
+        <button type="submit" value="Create" class="btn btn-primary">Submit</button>
+
+    </div>
+}
+
+    @section Scripts {
+        <script src="~/Scripts/signature_pad.min.js"></script>
+        <script src="~/Scripts/SignaturePadInit.js"></script>
+        <script src="~/Scripts/app.js"></script>
+    }

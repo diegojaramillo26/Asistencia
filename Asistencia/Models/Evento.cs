@@ -36,7 +36,8 @@ namespace Asistencia.Models
         [Required(ErrorMessage = "La fecha es requerida")]
         public System.DateTime dtmFecha { get; set; }
         [DataType(DataType.Time)]
-        [Required(ErrorMessage = "La duración es requerida")] public System.TimeSpan dtmDuracion { get; set; }
+        [Required(ErrorMessage = "La duración es requerida")] 
+        public System.TimeSpan dtmDuracion { get; set; }
         public bool bitEstado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

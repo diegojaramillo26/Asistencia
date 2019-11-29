@@ -157,7 +157,6 @@ D:\Projects\Asistencia\Asistencia\bin\Microsoft.CodeDom.Providers.DotNetCompiler
 D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.csproj.CopyComplete
 D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.dll
 D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.pdb
-D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.csprojAssemblyReference.cache
 E:\Proyectos\Asistencia\Asistencia\bin\Asistencia.dll.config
 E:\Proyectos\Asistencia\Asistencia\bin\Asistencia.dll
 E:\Proyectos\Asistencia\Asistencia\bin\Asistencia.pdb
@@ -241,3 +240,6 @@ E:\Proyectos\Asistencia\Asistencia\obj\Debug\Asistencia.dll
 E:\Proyectos\Asistencia\Asistencia\obj\Debug\Asistencia.pdb
 E:\Proyectos\Asistencia\Asistencia\bin\QRCoder.dll
 E:\Proyectos\Asistencia\Asistencia\bin\System.Drawing.Common.dll
+D:\Projects\Asistencia\Asistencia\bin\QRCoder.dll
+D:\Projects\Asistencia\Asistencia\bin\System.Drawing.Common.dll
+D:\Projects\Asistencia\Asistencia\obj\Debug\Asistencia.csprojAssemblyReference.cache
