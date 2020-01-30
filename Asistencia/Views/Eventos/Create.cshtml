@@ -1,58 +1,77 @@
 ﻿@model Asistencia.Models.Evento
 
+
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="container">
-    <h4>Evento</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.Label("Tema")
-        @Html.EditorFor(model => model.strTema, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.strTema, "", new { @class = "text-danger" })
 
-    </div>
+    <div class="container">
+        <h4>Evento</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Tema")
+            @Html.EditorFor(model => model.strTema, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strTema, "", new { @class = "text-danger" })
 
-    <div class="form-group">
-        @Html.Label("Facilitador")
-        @Html.EditorFor(model => model.strFacilitador, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.strFacilitador, "", new { @class = "text-danger" })
-    </div>
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Lugar")
-        @Html.EditorFor(model => model.strLugar, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.strLugar, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            @Html.Label("Facilitador")
+            @Html.EditorFor(model => model.strFacilitador, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strFacilitador, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Fecha")
-        @Html.EditorFor(model => model.dtmFecha, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.dtmFecha, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            @Html.Label("Lugar")
+            @Html.EditorFor(model => model.strLugar, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.strLugar, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        @Html.Label("Duración")
-        @Html.EditorFor(model => model.dtmDuracion, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.dtmDuracion, "", new { @class = "text-danger" })
-    </div>
+        <div class="form-group">
+            @Html.Label("Fecha")
+            @Html.EditorFor(model => model.dtmFecha, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.dtmFecha, "", new { @class = "text-danger" })
+        </div>
 
-    <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary" />
-        <input type="button" value="Volver" onclick="location.href='@Url.Action("Index","Eventos")'" class="btn btn-default" />
+        <div class="form-group">
+            @Html.Label("Duración")
+            @Html.EditorFor(model => model.dtmDuracion, new { htmlAttributes = new { @class = "form-control", @id = "time", @placeholder = "hh:mm", @type="text",@value=""} })
+            @Html.ValidationMessageFor(model => model.dtmDuracion, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Crear" class="btn btn-primary" />
+            <input type="button" value="Volver" onclick="location.href='@Url.Action("Index","Eventos")'" class="btn btn-default" />
+        </div>
     </div>
-</div>
 }
 
+<script type="text/javascript">
+            window.onload = function () {
+                    var time2 = document.getElementById('time2');
+                    var timepicker = new TimePicker('time', {
+                      lang: 'en',
+                      theme: 'blue-grey',
+                    });
+                    timepicker.on('change', function (evt) {
+                      var value = (evt.hour || '00') + ':' + (evt.minute || '00');
 
+                      if (evt.element.id === 'link') {
+                        time2.value = value;
+                      } else {
+                        evt.element.value = value;
+                      }
+                    });
+
+    };
+</script>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

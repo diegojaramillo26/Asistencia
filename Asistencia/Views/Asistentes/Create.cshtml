@@ -85,9 +85,23 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Crear" class="btn btn-primary" />
         </div>
     </div>
+}
+
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                @*alert("@ViewBag.Message");*@
+                                Swal.fire(
+                            'Completado!',
+                            '@TempData["Message"]',
+                            'success'
+                            );
+            };
+    </script>
 }
 
 @*<div>
@@ -97,7 +111,7 @@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 @section Scripts {
     <script src="~/Scripts/signature_pad.min.js"></script>
     <script src="~/Scripts/SignaturePadInit.js"></script>

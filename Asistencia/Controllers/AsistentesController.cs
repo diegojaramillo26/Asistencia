@@ -56,7 +56,11 @@ namespace Asistencia.Controllers
                 }
                 else
                 {
-                    return Content("<script language='javascript' type='text/javascript'>alert('El evento no se encuentra activo');</script>");
+                    TempData["Message"] = "El evento no se encuentra activo";
+                    return RedirectToAction("Index", "Eventos");
+                    //return Content("<script language='javascript' type='text/javascript'>alert('El evento no se encuentra activo');</script>");
+                   
+                    //return Content("<script language='javascript' type='text/javascript'>Swal.fire('El evento no se encuentra activo');</script>");
                 }
             }
 
@@ -75,7 +79,9 @@ namespace Asistencia.Controllers
                 asistente.intIdEvento = int.Parse((string)this.RouteData.Values["id"]);
                 db.Asistentes.Add(asistente);
                 db.SaveChanges();
+                TempData["Message"] = "El registro se guardó correctamente";
                 return RedirectToAction("Create");
+          
             }
 
             return View(asistente);

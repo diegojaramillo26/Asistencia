@@ -43,7 +43,7 @@
 
     <div class="form-group">
         @Html.Label("Duración")
-        @Html.EditorFor(model => model.dtmDuracion, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.EditorFor(model => model.dtmDuracion, new { htmlAttributes = new { @class = "form-control", @id = "time", @placeholder = "hh:mm", @type = "text",@value="" } })
         @Html.ValidationMessageFor(model => model.dtmDuracion, "", new { @class = "text-danger" })
     </div>
 
@@ -59,6 +59,26 @@
     </div>
 </div>
 }
+
+<script type="text/javascript">
+    window.onload = function () {
+        var time2 = document.getElementById('time2');
+        var timepicker = new TimePicker('time', {
+            lang: 'en',
+            theme: 'blue-grey',
+        });
+        timepicker.on('change', function (evt) {
+            var value = (evt.hour || '00') + ':' + (evt.minute || '00');
+
+            if (evt.element.id === 'link') {
+                time2.value = value;
+            } else {
+                evt.element.value = value;
+            }
+        });
+
+    };
+</script>
 
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
