@@ -57,13 +57,24 @@
                         @Html.DisplayFor(modelItem => item.bitEstado)
                     </td>
                     <td>
-                        @Html.ActionLink("Editar Evento", "Edit", new { id = item.intIdEvento }) |
-                        @*@Html.ActionLink("Detalle", "Details", new { id = item.intIdEvento }) |*@
-                        @Html.ActionLink("Asistencia", "Create", "Asistentes", new { id = item.intIdEvento }, null)|
-                        @Html.ActionLink("Editar asistentes", "Index", "Asistentes", new { id = item.intIdEvento }, null)|
-                        <a href="http://190.0.24.13/ReportServer/Pages/ReportViewer.aspx?%2fMontessori%2fAsistencia%2fRegistroAsistencia&rs:Command=Render&intIdEvento= + @item.intIdEvento" target="_blank">Reporte</a> |
-                        @Html.ActionLink("QR", "Link", new { txtQRCode = @Url.Action("Create", "Asistentes", new { id = item.intIdEvento }, this.Request.Url.Scheme) }) |
-                        @Html.ActionLink("Eliminar", "Delete", new { id = item.intIdEvento })|
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="ddOpciones" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Menú de opciones
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="ddOpciones">
+                                <li>@Html.ActionLink("Editar Evento", "Edit", new { id = item.intIdEvento })</li>
+                                 @*@Html.ActionLink("Detalle", "Details", new { id = item.intIdEvento }) |*@
+                                 <li>@Html.ActionLink("Asistencia", "Create", "Asistentes", new { id = item.intIdEvento }, null)</li>  
+                                 <li> @Html.ActionLink("Editar asistentes", "Index", "Asistentes", new { id = item.intIdEvento }, null)</li> 
+                                 <li><a href="http://190.0.24.13/ReportServer/Pages/ReportViewer.aspx?%2fMontessori%2fAsistencia%2fRegistroAsistencia&rs:Command=Render&intIdEvento= + @item.intIdEvento" target="_blank">Reporte</a></li>
+                                 <li>@Html.ActionLink("QR", "Link", new { txtQRCode = @Url.Action("Create", "Asistentes", new { id = item.intIdEvento }, this.Request.Url.Scheme) })</li>  
+                                 @*<li>@Html.ActionLink("Eliminar", "Delete", new { id = item.intIdEvento })</li>*@
+                                <li><a onclick="deletemessage(@item.intIdEvento)">Eliminar</a></li>
+                            </ul>
+                        </div>
+
+
 
                     </td>
                 </tr>
@@ -88,3 +99,55 @@
     </script>
 
 }
+
+<script>
+    function deletemessage(ide) {
+        Swal.fire({
+            title: 'Desea eliminar este registro?',
+            text: "Esta acción es definitva y no se puede revertir",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText:'Cancelar',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si'
+        }).then((result) => {
+            if (result.value) {
+                var id = ide;
+                var token = $('input[name="__RequestVerificationToken"]').val();
+		                $.ajax({
+			                url: '@Url.Action("Delete","Eventos")' + '/'+ id,
+			                type: "POST",
+			                traditional: true,
+                            data: {
+                                __RequestVerificationToken: token,
+                            },
+			                success: function () {
+                                //Swal.fire(
+                                //    'Completado!',
+                                //    'El registro fue eliminado',
+                                //    'success'
+                                //);
+                                Swal.fire({
+                                  icon: 'success',
+                                  title: 'Completado!',
+                                  text: 'Se eliminó el registro correctamente',
+                                    onClose: () => {
+                                        location.reload();
+                                    }
+
+                                })
+			                },
+                            error: function () {
+                                            Swal.fire(
+                                                'Opps!',
+                                                'se presento un error al eliminar el registro',
+                                                'error'
+                                                 )
+                            }
+		                });
+
+            }
+        });
+    }
+</script>
