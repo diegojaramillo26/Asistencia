@@ -1,0 +1,121 @@
+﻿@model IEnumerable<Asistencia.Models.Usuario>
+
+@{
+    ViewBag.Title = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@Html.AntiForgeryToken()
+<div class="table-responsive">
+    <table class="table table-striped table-bordered" id="tblUsuarios">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombres)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Apellidos)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Clave)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombres)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Apellidos)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Clave)
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                        <a class="btn btn-danger" onclick="deletemessage(@item.Id)" role="button">Eliminar</a>*@
+                        <a href="@Url.Action("Edit",new { id = item.Id })" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="#" onclick="deletemessage(@item.Id)" data-model-id="@item.Id" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Crear", "Create", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Crear masivo", "BulkCreate", null, new { @class = "btn btn-primary" })
+</p>
+@if (TempData["Message"] != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                                Swal.fire(
+                            'Completado!',
+                            '@TempData["Message"]',
+                            'success'
+                            );
+            };
+    </script>
+}
+<script>
+    function deletemessage(idu) {
+        Swal.fire({
+            title: 'Desea eliminar este registro?',
+            text: "Esta acción es definitva y no se puede revertir",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText:'Cancelar',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si'
+        }).then((result) => {
+            if (result.value) {
+                var id = idu;
+                var token = $('input[name="__RequestVerificationToken"]').val();
+		                $.ajax({
+			                url: '@Url.Action("Delete", "Usuarios")' + '/'+ id,
+			                type: "POST",
+			                traditional: true,
+                            data: {
+                                __RequestVerificationToken: token,
+                            },
+			                success: function () {
+                                //Swal.fire(
+                                //    'Completado!',
+                                //    'El registro fue eliminado',
+                                //    'success'
+                                //);
+                                Swal.fire({
+                                  icon: 'success',
+                                  title: 'Completado!',
+                                  text: 'Se eliminó el registro correctamente',
+                                    onClose: () => {
+                                        location.reload();
+                                    }
+
+                                })
+			                },
+                            error: function () {
+                                            Swal.fire(
+                                                'Opps!',
+                                                'se presento un error al registro el usuario',
+                                                'error'
+                                                 )
+                            }
+		                });
+
+            }
+        });
+    }
+</script>

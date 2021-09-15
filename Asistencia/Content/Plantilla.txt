@@ -1,0 +1,3 @@
+Nombres,Apellidos,Email,Clave,Roles
+Juan,Colorado,juanco@gmail.com,12345,1-2
+Diana,Ossa,dossa@gmail.com,12345,1

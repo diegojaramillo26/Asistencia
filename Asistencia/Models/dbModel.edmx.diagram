@@ -6,8 +6,13 @@
     <edmx:Diagrams>
       <Diagram DiagramId="fd88a8c4ea7e47d685efb7b1011cb2b4" Name="Diagram1">
         <EntityTypeShape EntityType="dbAppsModel.Asistente" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbAppsModel.Evento" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="dbAppsModel.FK_Asistentes_Eventos" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbAppsModel.Rol" Width="1.5" PointX="0.75" PointY="5.125" />
+        <EntityTypeShape EntityType="dbAppsModel.Usuario" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="dbAppsModel.Usuario_Rol" Width="1.5" PointX="3" PointY="4.875" />
+        <AssociationConnector Association="dbAppsModel.FK_Usuario_Rol_Rol" />
+        <AssociationConnector Association="dbAppsModel.FK_Usuario_Rol_Usuario" />
+        <EntityTypeShape EntityType="dbAppsModel.Evento" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="dbAppsModel.FK_Asistentes_Eventos" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

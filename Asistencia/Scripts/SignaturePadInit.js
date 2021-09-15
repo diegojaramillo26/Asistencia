@@ -24,10 +24,10 @@ Array.prototype.forEach.call(signaturePadWrappers, function (wrapper) {
             hiddenInput.value = base64str;
         };
 
-        clearButton.addEventListener('click', function () {
-            // Clear the canvas and hidden input
-            signaturePad.clear();
-            hiddenInput.value = '';
-        });
+        //clearButton.addEventListener('click', function () {
+        //    // Clear the canvas and hidden input
+        //    signaturePad.clear();
+        //    hiddenInput.value = '';
+        //});
     }
 });

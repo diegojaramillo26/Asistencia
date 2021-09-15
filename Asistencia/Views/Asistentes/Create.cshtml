@@ -1,7 +1,8 @@
 ﻿@model Asistencia.Models.Asistente
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = ViewBag.NombreEvento;
+    ViewBag.HideMenu = true;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,9 +12,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="container">
-        <h4>Asistente</h4>
-        <hr />
+    <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
@@ -29,7 +28,7 @@
         </div>
 
         <div class="form-group">
-            @Html.Label("Cargo")
+            @Html.Label("Cargo/Parentesco/Rol")
             @Html.EditorFor(model => model.strCargo, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.strCargo, "", new { @class = "text-danger" })
         </div>
@@ -43,7 +42,7 @@
             </div>*@
 
         <div class="form-group">
-            @Html.Label("Sección")
+            @Html.Label("Sección/Escuela/Grupo")
             @*@Html.EditorFor(model => model.strSeccion, new { htmlAttributes = new { @class = "form-control" } })*@
             @Html.DropDownListFor(model => model.strSeccion,
             new List<SelectListItem> {
@@ -85,7 +84,7 @@
         </div>
 
         <div class="form-group">
-            <input type="submit" value="Crear" class="btn btn-primary" />
+            <input type="submit" value="Registrar" class="btn btn-primary" />
         </div>
     </div>
 }
@@ -94,7 +93,6 @@
 {
     <script type="text/javascript">
             window.onload = function () {
-                @*alert("@ViewBag.Message");*@
                                 Swal.fire(
                             'Completado!',
                             '@TempData["Message"]',
@@ -104,14 +102,6 @@
     </script>
 }
 
-@*<div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>*@
-
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 @section Scripts {
     <script src="~/Scripts/signature_pad.min.js"></script>
     <script src="~/Scripts/SignaturePadInit.js"></script>

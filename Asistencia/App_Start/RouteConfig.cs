@@ -12,7 +12,11 @@ namespace Asistencia
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                 name: "Asistencia",
+                 url: "diligenciar-asistencia/{id}",
+                 defaults: new { controller = "Asistentes", action = "Create" }
+             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

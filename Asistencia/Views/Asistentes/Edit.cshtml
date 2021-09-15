@@ -1,7 +1,7 @@
 ﻿@model Asistencia.Models.Asistente
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Editar asistente";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,40 +10,39 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="container">
-        <h4>Asistente</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.IntIdAsistente)
+<div class="form-horizontal">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IntIdAsistente)
+    @Html.HiddenFor(model => model.intIdEvento)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.strNombre, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.strNombre, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.strNombre, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.strCargo, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.strCargo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.strCargo, "", new { @class = "text-danger" })
-        </div>
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.strSeccion, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.strSeccion, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.strSeccion, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.strDocumento, htmlAttributes: new { @class = "control-label col-md-2" })
-                @Html.EditorFor(model => model.strDocumento, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.strDocumento, "", new { @class = "text-danger" })
-        </div>
-
-        <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-        </div>
+    <div class="form-group">
+        @Html.Label("Documento")
+        @Html.EditorFor(model => model.strDocumento, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.strDocumento, "", new { @class = "text-danger" })
     </div>
+
+    <div class="form-group">
+        @Html.Label("Nombre")
+        @Html.EditorFor(model => model.strNombre, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.strNombre, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Cargo")
+        @Html.EditorFor(model => model.strCargo, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.strCargo, "", new { @class = "text-danger" })
+    </div>
+
+
+    <div class="form-group">
+        @Html.Label("Sección")
+        @Html.EditorFor(model => model.strSeccion, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.strSeccion, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Guardar" class="btn btn-primary" />
+    </div>
+</div>
 }
 
