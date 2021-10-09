@@ -28,6 +28,34 @@
           <Property Name="dtmFecha" Type="date" Nullable="false" />
           <Property Name="dtmDuracion" Type="time" Precision="7" Nullable="false" />
           <Property Name="bitEstado" Type="bit" Nullable="false" />
+          <Property Name="intCreador" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Apellidos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Clave" Type="varchar(max)" Nullable="false" />
+          <Property Name="ProviderKey" Type="varchar" MaxLength="50" />
+          <Property Name="ProviderName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuario_Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Usuario" Type="int" Nullable="false" />
+          <Property Name="Id_rol" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Asistentes_Eventos">
           <End Role="Eventos" Type="Self.Eventos" Multiplicity="1">
@@ -43,12 +71,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Usuario_Rol_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario_Rol" Type="Self.Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+          <End Role="Usuario_Rol" Type="Self.Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="dbAppsModelStoreContainer">
           <EntitySet Name="Asistentes" EntityType="Self.Asistentes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Eventos" EntityType="Self.Eventos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Identity" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Identity" store:Type="Tables" />
+          <EntitySet Name="Usuario_Rol" EntityType="Self.Usuario_Rol" Schema="Identity" store:Type="Tables" />
           <AssociationSet Name="FK_Asistentes_Eventos" Association="Self.FK_Asistentes_Eventos">
             <End Role="Eventos" EntitySet="Eventos" />
             <End Role="Asistentes" EntitySet="Asistentes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol_Rol" Association="Self.FK_Usuario_Rol_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol_Usuario" Association="Self.FK_Usuario_Rol_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -63,46 +126,113 @@
           <Property Name="strNombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="strCargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="intIdEvento" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Evento" Relationship="Self.FK_Asistentes_Eventos" FromRole="Asistentes" ToRole="Eventos" />
           <Property Name="strSeccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="binFirma" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="strDocumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Evento" Relationship="dbAppsModel.FK_Asistentes_Eventos" FromRole="Asistente" ToRole="Evento" />
         </EntityType>
+        <EntityContainer Name="dbAppsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asistentes" EntityType="Self.Asistente" />
+          <EntitySet Name="Rols" EntityType="dbAppsModel.Rol" />
+          <EntitySet Name="Usuarios" EntityType="dbAppsModel.Usuario" />
+          <EntitySet Name="Usuario_Rol" EntityType="dbAppsModel.Usuario_Rol" />
+          <AssociationSet Name="FK_Usuario_Rol_Rol" Association="dbAppsModel.FK_Usuario_Rol_Rol">
+            <End Role="Rol" EntitySet="Rols" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Rol_Usuario" Association="dbAppsModel.FK_Usuario_Rol_Usuario">
+            <End Role="Usuario" EntitySet="Usuarios" />
+            <End Role="Usuario_Rol" EntitySet="Usuario_Rol" />
+          </AssociationSet>
+          <EntitySet Name="Eventos" EntityType="dbAppsModel.Evento" />
+          <AssociationSet Name="FK_Asistentes_Eventos" Association="dbAppsModel.FK_Asistentes_Eventos">
+            <End Role="Evento" EntitySet="Eventos" />
+            <End Role="Asistente" EntitySet="Asistentes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario_Rol" Relationship="dbAppsModel.FK_Usuario_Rol_Rol" FromRole="Rol" ToRole="Usuario_Rol" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ProviderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario_Rol" Relationship="dbAppsModel.FK_Usuario_Rol_Usuario" FromRole="Usuario" ToRole="Usuario_Rol" />
+        </EntityType>
+        <EntityType Name="Usuario_Rol">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Id_rol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="dbAppsModel.FK_Usuario_Rol_Rol" FromRole="Usuario_Rol" ToRole="Rol" />
+          <NavigationProperty Name="Usuario" Relationship="dbAppsModel.FK_Usuario_Rol_Usuario" FromRole="Usuario_Rol" ToRole="Usuario" />
+        </EntityType>
+        <Association Name="FK_Usuario_Rol_Rol">
+          <End Type="dbAppsModel.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="dbAppsModel.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Rol_Usuario">
+          <End Type="dbAppsModel.Usuario" Role="Usuario" Multiplicity="1" />
+          <End Type="dbAppsModel.Usuario_Rol" Role="Usuario_Rol" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario_Rol">
+              <PropertyRef Name="Id_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Evento">
           <Key>
             <PropertyRef Name="intIdEvento" />
           </Key>
           <Property Name="intIdEvento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="strTema" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="strFacilitador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="strLugar" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="dtmFecha" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="dtmDuracion" Type="Time" Precision="7" Nullable="false" />
-          <NavigationProperty Name="Asistentes" Relationship="Self.FK_Asistentes_Eventos" FromRole="Eventos" ToRole="Asistentes" />
+          <Property Name="strTema" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="strFacilitador" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="strLugar" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="dtmFecha" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="dtmDuracion" Type="Time" Nullable="false" Precision="7" />
           <Property Name="bitEstado" Type="Boolean" Nullable="false" />
+          <Property Name="intCreador" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Asistentes" Relationship="dbAppsModel.FK_Asistentes_Eventos" FromRole="Evento" ToRole="Asistente" />
         </EntityType>
         <Association Name="FK_Asistentes_Eventos">
-          <End Role="Eventos" Type="Self.Evento" Multiplicity="1">
+          <End Type="dbAppsModel.Evento" Role="Evento" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Asistentes" Type="Self.Asistente" Multiplicity="*" />
+          <End Type="dbAppsModel.Asistente" Role="Asistente" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Eventos">
+            <Principal Role="Evento">
               <PropertyRef Name="intIdEvento" />
             </Principal>
-            <Dependent Role="Asistentes">
+            <Dependent Role="Asistente">
               <PropertyRef Name="intIdEvento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="dbAppsEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Asistentes" EntityType="Self.Asistente" />
-          <EntitySet Name="Eventos" EntityType="Self.Evento" />
-          <AssociationSet Name="FK_Asistentes_Eventos" Association="Self.FK_Asistentes_Eventos">
-            <End Role="Eventos" EntitySet="Eventos" />
-            <End Role="Asistentes" EntitySet="Asistentes" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -122,16 +252,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Rols">
+            <EntityTypeMapping TypeName="dbAppsModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="dbAppsModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="ProviderName" ColumnName="ProviderName" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario_Rol">
+            <EntityTypeMapping TypeName="dbAppsModel.Usuario_Rol">
+              <MappingFragment StoreEntitySet="Usuario_Rol">
+                <ScalarProperty Name="Id_rol" ColumnName="Id_rol" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Eventos">
             <EntityTypeMapping TypeName="dbAppsModel.Evento">
               <MappingFragment StoreEntitySet="Eventos">
+                <ScalarProperty Name="intCreador" ColumnName="intCreador" />
                 <ScalarProperty Name="bitEstado" ColumnName="bitEstado" />
-                <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
-                <ScalarProperty Name="strTema" ColumnName="strTema" />
-                <ScalarProperty Name="strFacilitador" ColumnName="strFacilitador" />
-                <ScalarProperty Name="strLugar" ColumnName="strLugar" />
-                <ScalarProperty Name="dtmFecha" ColumnName="dtmFecha" />
                 <ScalarProperty Name="dtmDuracion" ColumnName="dtmDuracion" />
+                <ScalarProperty Name="dtmFecha" ColumnName="dtmFecha" />
+                <ScalarProperty Name="strLugar" ColumnName="strLugar" />
+                <ScalarProperty Name="strFacilitador" ColumnName="strFacilitador" />
+                <ScalarProperty Name="strTema" ColumnName="strTema" />
+                <ScalarProperty Name="intIdEvento" ColumnName="intIdEvento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

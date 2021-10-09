@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Asistencia.Models.Asistente>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Asistentes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Html.AntiForgeryToken()
@@ -21,39 +21,34 @@
                 <th>
                     @Html.Label("Documento")
                 </th>
-                <th>
-                    @Html.Label("Tema")
-                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.strNombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.strCargo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.strSeccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.strDocumento)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Edit",new { id = item.IntIdAsistente })" title="Editar"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a href="#" onclick="deletemessage(@item.IntIdAsistente)" data-model-id="@item.IntIdAsistente" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+                        @*@Html.ActionLink("Editar", "Edit", new { id = item.IntIdAsistente }, new { @class = "btn btn-primary" })
+                        <input type="button" value="Eliminar" onclick="deletemessage(@item.IntIdAsistente)" data-model-id="@item.IntIdAsistente" class="btn btn-danger btn-sm" />*@
+                    </td>
+                </tr>
+            }
         </tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.strNombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.strCargo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.strSeccion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.strDocumento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Evento.strTema)
-                </td>
-                <td>
-                    @*@Html.ActionLink("Editar", "Edit", new { id = item.IntIdAsistente }) |*@
-                    @*@Html.ActionLink("Delete", "Delete", new { id = item.IntIdAsistente })*@
-                    <input type="button" value="Eliminar" onclick="deletemessage(@item.IntIdAsistente)" data-model-id="@item.IntIdAsistente" class="btn btn-primary btn-sm" />
-                </td>
-            </tr>
-        }
     </table>
 
 </div>

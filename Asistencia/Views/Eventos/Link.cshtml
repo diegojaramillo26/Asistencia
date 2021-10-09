@@ -1,15 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "Link";
+    ViewBag.Title = "QR asistencia";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="container">
-        <h2>Ingreso de asistencia</h2>
+    <div class="form-horizontal">
+        
         <div class="form-group">
             @if (ViewBag.imageBytes != null)
             {
-                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.imageBytes))" class="img-responsive" alt="Responsive image" />
+                <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(ViewBag.imageBytes))" class="img-responsive center-block w-50" alt="Responsive image"  style=" max-width:480px"/>
             }
         </div>
 
